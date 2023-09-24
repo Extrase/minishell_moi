@@ -6,7 +6,7 @@
 /*   By: diavolo <diavolo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:08:22 by diavolo           #+#    #+#             */
-/*   Updated: 2023/09/21 18:37:57 by diavolo          ###   ########.fr       */
+/*   Updated: 2023/09/24 15:20:36 by diavolo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-void	ft_put_data_exec(t_cmds *data_exec, char **av, int ac, char **env);
+void	ft_put_data_exec(t_cmds *data_exec, char **av, char **env);
 int		ft_call_bonus(t_cmds *data_exec);
 int		ft_make_bonus(t_cmds *data_exec);
 void	ft_pipe_action(t_cmds *data_exec, int i);

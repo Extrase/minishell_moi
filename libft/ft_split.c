@@ -3,97 +3,108 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diavolo <diavolo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/14 15:19:43 by mderkaou          #+#    #+#             */
-/*   Updated: 2023/04/01 14:38:24 by diavolo          ###   ########.fr       */
+/*   Created: 2022/11/14 17:42:50 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 14:44:08 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	cpy(char *dst, char const *src, int n)
+static int	wc(char *str, char c)
 {
-	while (n--)
-		*dst++ = *src++;
-	*dst = '\0';
+	int	count;
+	int	i;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		while (str[i] && str[i] == c)
+			i++;
+		if (str[i])
+			count++;
+		while (str[i] && str[i] != c)
+			i++;
+	}
+	return (count);
 }
 
-static int	allocate(char const *s, char **list, int word_length, int index)
+static int	wl(char *str, char c)
 {
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	return (i);
+}
+
+static char	*ft_word(char *str, char c)
+{
+	int		i;
+	int		wlen;
 	char	*word;
 
-	word = (char *)malloc(sizeof(char) * (word_length + 1));
-	if (!word)
+	i = 0;
+	wlen = wl(str, c);
+	word = (char *)malloc(sizeof(char) * (wlen + 1));
+	if (word == NULL)
+		return (NULL);
+	while (i < wlen)
 	{
-		while (index >= 0)
-			free(list[index--]);
-		free(list);
-		return (0);
+		word[i] = str[i];
+		i++;
 	}
-	cpy(word, (s - word_length), word_length);
-	list[index++] = word;
-	return (1);
+	word[i] = '\0';
+	return (word);
 }
 
-static int	create_word(char const *s, char c, char **list, int words)
+char	**ft_split(char const *s, char c)
 {
-	int	word_length;
-	int	index;
+	int		i;
+	char	*str;
+	char	**strs;
 
-	index = 0;
-	while (*s != '\0')
-	{
-		word_length = 0;
-		if (*s != c)
-		{
-			while (index != words)
-			{
-				if (*s == c || *s == '\0')
-				{
-					if (!allocate(s, list, word_length, index))
-						return (0);
-					index++;
-					break ;
-				}
-				word_length++;
-				s++;
-			}
-		}
-		s++;
-	}
-	return (index);
-}
-
-static int	count_words(char const *str, char c)
-{
-	int	words;
-
-	words = 0;
+	i = 0;
+	str = (char *)s;
+	strs = (char **)malloc(sizeof(char *) * (wc(str, c) + 1));
+	if (strs == NULL)
+		return (NULL);
 	while (*str)
 	{
-		if (*str != c && (*(str + 1) == c || *(str + 1) == '\0'))
-			words++;
-		str++;
+		while (*str && *str == c)
+			str++;
+		if (*str != '\0')
+		{
+			strs[i] = ft_word(str, c);
+			i++;
+		}
+		while (*str && *str != c)
+			str++;
 	}
-	return (words);
+	strs[i] = 0;
+	return (strs);
 }
 
-char	**ft_split(char *s, char c)
+/*
+#include <stdio.h>
+int	main(int ac, char **av)
 {
-	int		words;
-	char	**list;
-	int		index;
+	int	i;
+	char	**test;
+	char	sep;
 
-	if (s == 0 || !s)
-		return (0);
-	words = count_words(s, c);
-	list = malloc(sizeof(char *) * (words + 1));
-	if (!list)
-		return (NULL);
-	index = create_word(s, c, list, words);
-	if (!list)
-		return (NULL);
-	list[index] = NULL;
-	return (list);
+	sep = '-';
+	(void)ac;	
+	i = 0;
+	test = ft_split(av[1], sep);
+	while (test[i])
+	{
+		printf("%s\n", test[i]);
+		i++;
+	}
+	return (0);
 }
+*/

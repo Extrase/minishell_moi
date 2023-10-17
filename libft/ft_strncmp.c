@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diavolo <diavolo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 17:03:02 by mderkaou          #+#    #+#             */
-/*   Updated: 2023/05/17 14:33:00 by diavolo          ###   ########.fr       */
+/*   Created: 2022/11/08 11:52:23 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 18:07:20 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,30 @@
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t			i;
-	unsigned char	*str;
-	unsigned char	*str2;
+	unsigned char	*st1;
+	unsigned char	*st2;
 
 	i = 0;
-	str = ((unsigned char *)s1);
-	str2 = ((unsigned char *)s2);
-	while (i < n)
+	st1 = (unsigned char *)s1;
+	st2 = (unsigned char *)s2;
+	while ((st1[i] || st2[i]) && i < n)
 	{
-		if (str[i] != str2[i])
-			return (str[i] - str2[i]);
-		++i;
+		if (st1[i] != st2[i])
+			return (st1[i] - st2[i]);
+		i++;
 	}
 	return (0);
 }
 
-// int	main()
-// {
-// 	char	str[] = "";
-// 	char	str2[] = "jfgjfg";
-
-// 	printf("%d\n", ft_strncmp(str, str2, 100));
-// 	printf("%d\n", strncmp(str, str2, 100));
-// }
+/*
+#include <string.h>
+#include <stdio.h>
+int main()
+{
+	char *str = "test\200";
+	char *str2 = "test\0";
+	printf("%d\n", ft_strncmp(str, str2, 6));
+	printf("%d\n", strncmp(str, str2, 6));
+	return 0;
+}
+*/

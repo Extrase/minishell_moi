@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 16:54:49 by thenry            #+#    #+#             */
-/*   Updated: 2022/11/15 14:22:13 by thenry           ###   ########.fr       */
+/*   Created: 2022/11/14 21:34:39 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 14:54:40 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+int	ft_tolower(int c)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	return (c);
+}
+
+/*
+#include <stdio.h>
+int main()
+{
+	char c = 'H';
+	printf("%c\n", ft_tolower(c));
 	return (0);
 }
+*/

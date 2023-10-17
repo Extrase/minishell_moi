@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diavolo <diavolo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/13 17:30:18 by mderkaou          #+#    #+#             */
-/*   Updated: 2023/05/12 23:07:21 by diavolo          ###   ########.fr       */
+/*   Created: 2022/11/14 14:58:42 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 18:51:11 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,38 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
+	size_t		len1;
+	size_t		len2;
 	size_t		i;
-	size_t		j;
-	char		*copy;
+	char		*str;
 
-	i = ft_strlene(((char *)s1));
-	j = ft_strlene(((char *)s2));
-	copy = malloc(sizeof(*s1) * (i + j) + 2);
-	if (!copy)
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	if (s1 && s2)
 	{
-		copy[i] = ((char *)s1)[i];
-		++i;
+		len1 = ft_strlen(s1);
+		len2 = ft_strlen(s2);
+		str = (char *)malloc((len1 + len2 + 1) * sizeof(char));
+		if (!str)
+			return (NULL);
+		i = -1;
+		while (s1[++i])
+			str[i] = s1[i];
+		i = -1;
+		while (s2[++i])
+			str[len1 + i] = s2[i];
+		str[len1 + i] = '\0';
+		return (str);
 	}
-	j = 0;
-	copy[i++] = '/';
-	while (s2[j] && s2[j + 1] != '-')
-	{
-		copy[i] = ((char *)s2)[j];
-		++j;
-		++i;
-	}
-	copy[i] = '\0';
-	return (copy);
+	return (NULL);
 }
 
-/*int	main()
+/*
+#include <stdio.h>
+int	main()
 {
-	char const	s1[] = "Ce qui compte, c'est pas d'avoir beaucoup de temps";
-	char const	s2[] = " c'est de savoir s'en servir";
-	char	*test;
+	char	*s1 = "";
+	char	*s2 = "dolor sit amet";
 
-	test = ft_strjoin(s1, s2);
-	printf("%s\n", test);
-}*/
+	printf("%s\n", ft_strjoin(s1, s2));
+	return (0);
+}
+*/

@@ -3,40 +3,49 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: diavolo <diavolo@student.42.fr>            +#+  +:+       +#+         #
+#    By: mderkaou <mderkaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/03 02:47:34 by diavolo           #+#    #+#              #
-#    Updated: 2023/09/21 18:32:05 by diavolo          ###   ########.fr        #
+#    Created: 2023/01/24 16:09:12 by thenry            #+#    #+#              #
+#    Updated: 2023/10/17 15:57:38 by mderkaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME     = minishell
-CC         = cc
-CFLAGS     = -Wall -Wextra -Werror -g3
-SRCS     =   main.c make_multi.c make_multi2.c init_exec.c utils.c path_bin.c  \
-			doc.c ft_split_2.c ./libft/ft_strlen.c ./libft/ft_strjoin.c \
-			./libft/ft_split.c ./libft/ft_strdup.c ./libft/ft_strncmp.c shame.c\
-			./libft/ft_strjoin.c ./libft/ft_atoi.c one_pipe.c\
-			./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c \
-			./libft/ft_strlcpy.c ./libft/ft_putstr_fd.c \
+SRCS	=	src/main.c src/error.c src/tokenise_fl.c src/tokenise_fl_utils.c src/history.c src/signal.c src/create_cmds.c src/tokenise_sl.c src/utils.c src/clean_sl.c src/expansion.c src/handle_quotes.c src/free.c src/exit_builtin.c src/echo_builtin.c src/get_env.c src/env_builtin.c src/export_builtin.c src/pwd_builtin.c src/unset_builtin.c src/cd_builtin.c \
+			exec/Xcution.c exec/utils_exc.c exec/clean_exec.c exec/exec.c exec/exec_builtin.c\
+			exec/exec_tools.c exec/ft_split_spec.c exec/clean_exec2.c exec/one_exec.c\
 
+NAME	= 	minishell
 
-OBJS    = $(SRCS:.c=.o)
+OBJS	= 	${SRCS:.c=.o}
 
-all : $(NAME)
+CFLAGS	= 	-Wall -Wextra -Werror -g
 
-$(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+CC	= 	cc
 
-%.o:%.c
-	$(CC) $(CFLAGS) -c $^ -o $@
+LIBR	=	libft/libft.a
+
+all:		${NAME}
+
+.c.o:
+		${CC} ${CFLAGS} -MMD -MP -c $< -o ${<:.c=.o}
+
+-include ${SRCS:.c=.d}
+
+${NAME}:	${OBJS}
+		make -C libft
+		${CC} ${CFLAGS} ${OBJS} ${LIBR} -lreadline -o ${NAME}
 
 clean:
-	rm -f $(OBJS)
+		rm -rf ${OBJS}
+		#rm -f draft/main.d
+		rm -rf src/*.d
+		rm -rf exec/*.d
+		make -C libft clean
 
-fclean: clean
-	rm -f $(NAME)
+fclean:		clean
+		rm -rf ${NAME}
+		make -C libft fclean
 
-re: fclean all
+re:		fclean all
 
-.PHONY:			all clean fclean re
+.PHONY:		all re clean fclean

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderkaou <mderkaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 11:10:44 by mderkaou          #+#    #+#             */
-/*   Updated: 2022/11/19 16:19:02 by mderkaou         ###   ########.fr       */
+/*   Created: 2022/11/09 10:27:14 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 14:48:35 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,22 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (i);
 }
 
-/*int	main()
+/*
+#include <bsd/bsd.h>
+#include <string.h>
+#include <stdio.h>
+int main()
 {
-	const char	src[] = "Tah lewandoski";
-	char		dest[] = "";
-	const char      src2[] = "Tah lewandoski";
-	char		dest2[] = "";
-	int	r = ft_strlcpy(dest, src, sizeof(src));
-
-	printf("%s\n", dest);
-	printf("%d\n", r);
-	r = strlcpy(dest2, src2, sizeof(src));
-	printf("%s\n", dest2);
-	printf("%d", r);
-}*/
+	char *str = "hello tenny";
+	char *str2 = "hello tenny";
+	char cpy[20];
+	char cpy2[20];
+	printf("ma fonction = %ld\n", ft_strlcpy(cpy, str, 11));
+	printf("str = %s\n", str);
+	printf("cpy = %s\n", cpy);
+	printf("vrai fonction = %ld\n", strlcpy(cpy2, str2, 11));
+	printf("str2 = %s\n", str2);
+	printf("cpy2 = %s\n", cpy2);
+	return 0;
+}
+*/

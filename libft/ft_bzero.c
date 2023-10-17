@@ -1,45 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 00:16:19 by thenry            #+#    #+#             */
-/*   Updated: 2022/11/15 16:06:43 by thenry           ###   ########.fr       */
+/*   Created: 2022/11/07 13:12:35 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 15:52:44 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+void	ft_bzero(void *s, size_t n)
 {
-	char	*dup;
-	char	*src;
-	int		len;
-	int		i;
+	char	*tmp;
 
-	i = 0;
-	src = (char *)s;
-	len = ft_strlen(src) + 1;
-	dup = (char *)malloc(len * sizeof(char));
-	if (dup == NULL)
-		return (NULL);
-	while (src[i])
+	tmp = s;
+	while (n)
 	{
-		dup[i] = src[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
+		*tmp = 0;
+		tmp++;
+		n--;
+	}		
 }
 
 /*
 #include <stdio.h>
+#include <string.h>
 int main()
 {
-	char *str = "hello la";
-	printf("%s\n", ft_strdup(str));
-	return 0;
+	int i = 0;
+        char str[] = "hello world";
+	int tab[3] = {1, 2, 3};
+
+	//test str
+        printf("%s\n", str);
+        ft_bzero(str, 5);
+        printf("%s\n", str);
+
+	//test tab
+	while (i < 3)
+	{
+		printf("%d\n", tab[i]);
+		i++;
+	}
+	i = 0;
+	ft_bzero(tab, sizeof(tab));
+	while (i < 3)
+	{
+		printf("%d\n", tab[i]);
+		i++;
+	}
+        return 0;
 }
 */

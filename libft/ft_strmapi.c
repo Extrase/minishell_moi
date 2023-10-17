@@ -1,34 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 18:54:17 by thenry            #+#    #+#             */
-/*   Updated: 2022/11/15 14:43:08 by thenry           ###   ########.fr       */
+/*   Created: 2022/11/14 20:37:18 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 14:51:18 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int	i;
+	char	*str;
+	int		i;
 
 	i = 0;
+	str = (char *)malloc(ft_strlen(s) * sizeof(char) + 1);
+	if (str == NULL)
+		return (NULL);
 	while (s[i])
 	{
-		write(fd, &s[i], 1);
+		str[i] = f(i, s[i]);
 		i++;
 	}
+	str[i] = '\0';
+	return (str);
 }
 
 /*
-int main()
+#include <stdio.h>
+char	to_upper(unsigned int i, char c)
 {
-	char	*str = "hello";
-	ft_putstr_fd(str, 1);
+	if (c >= 97 && c <= 122)
+		c = c - 32;
+	return (c);
+}
+
+int	main()
+{
+	char *str = "hello world";
+	printf("%s\n", ft_strmapi(str, to_upper));
 	return (0);
 }
 */

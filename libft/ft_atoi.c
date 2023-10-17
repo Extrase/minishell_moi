@@ -3,30 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mderkaou <mderkaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 21:44:03 by mderkaou          #+#    #+#             */
-/*   Updated: 2023/02/08 18:51:29 by mderkaou         ###   ########.fr       */
+/*   Created: 2022/09/16 19:04:05 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/16 16:01:27 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-long long int	ft_atoi(const char *nptr)
+static int	is_space(char c)
 {
-	long long int	i;
-	long long int	nb;
-	long long int	count;
+	if (c == ' ' || c == '\f' || c == '\n'
+		|| c == '\r' || c == '\t' || c == '\v')
+		return (1);
+	return (0);
+}
+
+int	ft_atoi(const char *nptr)
+{
+	int	i;
+	int	nb;
+	int	sign;
 
 	i = 0;
 	nb = 0;
-	count = 0;
-	while ((nptr[i] >= 9 && nptr[i] <= 13) || (nptr[i] == ' '))
-		++i;
-	if ((nptr[i] == '-') || (nptr[i] == '+'))
+	sign = 1;
+	while (nptr[i] && is_space(nptr[i]))
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
 		if (nptr[i] == '-')
-			++count;
+			sign = -1;
 		i++;
 	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
@@ -34,16 +40,17 @@ long long int	ft_atoi(const char *nptr)
 		nb = nb * 10 + (nptr[i] - '0');
 		i++;
 	}
-	if (count % 2 != 0)
-		return (-nb);
-	return (nb);
+	return (nb * sign);
 }
 
-/*int	main(int ac, const char *av[])
-  {
-  if (ac > 1)
-  {
-  printf("%d\n", ft_atoi(av[1]));
-  printf("%d", atoi(av[1]));
-  }
-  }*/
+/*
+#include <stdlib.h>
+#include <stdio.h>
+int	main()
+{
+	char *num = "\e546";
+	printf("%d\n", ft_atoi(num));
+	printf("%d\n", atoi(num));
+	return (0);
+}
+*/

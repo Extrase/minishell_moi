@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 16:54:49 by thenry            #+#    #+#             */
-/*   Updated: 2022/11/15 14:22:13 by thenry           ###   ########.fr       */
+/*   Created: 2023/09/20 13:15:36 by thenry            #+#    #+#             */
+/*   Updated: 2023/09/20 13:16:31 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+// THIS FILE HANDLES ERROR DUH
+
+#include "minishell.h"
+
+int     ft_error(char *str)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+        write(2, str, ft_strlen(str));
+        return (1);
 }

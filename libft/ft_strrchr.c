@@ -1,34 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 18:54:17 by thenry            #+#    #+#             */
-/*   Updated: 2022/11/15 14:43:08 by thenry           ###   ########.fr       */
+/*   Created: 2022/11/09 11:56:35 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 21:13:47 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	char	*str;
+	int		i;
 
-	i = 0;
-	while (s[i])
+	str = (char *)s;
+	i = ft_strlen(str);
+	while (i >= 0)
 	{
-		write(fd, &s[i], 1);
-		i++;
+		if (str[i] == (char)c)
+			return (str + i);
+		i--;
 	}
+	return (NULL);
 }
 
 /*
+#include <string.h>
+#include <stdio.h>
 int main()
 {
-	char	*str = "hello";
-	ft_putstr_fd(str, 1);
-	return (0);
+	char str2[] = "bonjour";
+	printf("%s, %p\n", ft_strrchr(str2, '\0'), ft_strrchr(str2, '\0'));
+	printf("%s, %p\n", strrchr(str2, '\0'), strrchr(str2, '\0'));
+	return 0;
 }
 */

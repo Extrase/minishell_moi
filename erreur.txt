@@ -1,0 +1,39 @@
+ERROR TO HANDLE
+
+echo "$USER"'$USER'
+should not expand both var
+
+echo '$USER'"$USER"
+should expand the second one
+
+echo 'lol'"$USER"
+should expand the second one
+
+echo $
+should print $
+
+echo $?
+should print the last exit status
+
+echo "lol"'
+should not work because of unclosed quotes
+
+echo "'lol'
+should not work because of unclosed quotes
+
+echo lol | | ls
+should not work
+
+echo lol || ls
+should not work
+
+handle crappy operator AGAIN
+
+echo lol >| ls
+should stop the program
+
+export z=lol lol
+should only take z=lol into account
+
+echo '"salut"'
+should display "salut"

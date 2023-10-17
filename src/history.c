@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 16:54:49 by thenry            #+#    #+#             */
-/*   Updated: 2022/11/15 14:22:13 by thenry           ###   ########.fr       */
+/*   Created: 2023/09/20 15:34:07 by thenry            #+#    #+#             */
+/*   Updated: 2023/10/13 17:34:58 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+#include "minishell.h"
+
+int	bool_history(char *prompt)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
+	int	i;
+
+	i = 0;
+	if (prompt[0] == '\0')
+		return (0);
+	while (prompt[i])
+	{
+		if (!ft_space(prompt[i]))
+			return (1);
+		i++;
+	}
 	return (0);
 }

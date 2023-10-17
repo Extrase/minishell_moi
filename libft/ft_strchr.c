@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 18:54:17 by thenry            #+#    #+#             */
-/*   Updated: 2022/11/15 14:43:08 by thenry           ###   ########.fr       */
+/*   Created: 2022/11/08 12:04:10 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/18 13:52:58 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	char	*str;
 
-	i = 0;
-	while (s[i])
+	str = (char *)s;
+	while (*str != c && ft_isascii(c))
 	{
-		write(fd, &s[i], 1);
-		i++;
+		if (*str == '\0')
+			return (NULL);
+		str++;
 	}
+	return (str);
 }
 
 /*
+#include <string.h>
+#include <stdio.h>
 int main()
 {
-	char	*str = "hello";
-	ft_putstr_fd(str, 1);
-	return (0);
+	char str[] = "hello 0 world";
+	char a = 0;
+	printf("%s, %p\n", ft_strchr(str, a), ft_strchr(str, a));
+	printf("%s, %p\n", strchr(str, a), strchr(str, a));
+	return 0;
 }
 */
